@@ -7,18 +7,33 @@ $stmt->execute();
 
 $result = $stmt->fetchAll();
 
-if (isset($_POST['minbtn']) && $_POST['minbtn'] == '-') {
-    $_SESSION['cart'][$_POST['name']] -= 1;
-}
-
 if (isset($_POST['delbtn']) && $_POST['delbtn'] == 'delete') {
     unset($_SESSION['cart']);
 }
 
-if (isset($_POST['plusbtn']) && $_POST['plusbtn'] == '+') {
+if (isset($_POST['minbtn']) && $_POST['minbtn'] == '-1') {
+    $_SESSION['cart'][$_POST['name']] -= 1;
+}
+
+if (isset($_POST['plusbtn']) && $_POST['plusbtn'] == '+1') {
     $_SESSION['cart'][$_POST['name']] += 1;
 }
 
+if (isset($_POST['min10btn']) && $_POST['min10btn'] == '-10') {
+    $_SESSION['cart'][$_POST['name']] -= 10;
+}
+
+if (isset($_POST['plus10btn']) && $_POST['plus10btn'] == '+10') {
+    $_SESSION['cart'][$_POST['name']] += 10;
+}
+
+if (isset($_POST['min100btn']) && $_POST['min100btn'] == '-100') {
+    $_SESSION['cart'][$_POST['name']] -= 100;
+}
+
+if (isset($_POST['plus100btn']) && $_POST['plus100btn'] == '+100') {
+    $_SESSION['cart'][$_POST['name']] += 100;
+}
 
 // unset($_SESSION['cart']);
 
@@ -164,6 +179,7 @@ if (isset($_POST['plusbtn']) && $_POST['plusbtn'] == '+') {
                             <thead>
                                 <th scope="col">name</th>
                                 <th scope="col">amount</th>
+                                <th scope="col">price</th>
                                 </tr>
                             </thead>
                             <?php } ?>
@@ -173,7 +189,7 @@ if (isset($_POST['plusbtn']) && $_POST['plusbtn'] == '+') {
                                     $_SESSION['cart'] = [];
                                 }
                                 if(isset($_SESSION['cart']) && empty($_SESSION['cart'])) {
-                                    echo 'your cart is empty!!';
+                                    echo 'your cart is empty!! go back to menu and order your food!';
                                 }
                             ?>
                             <?php foreach($_SESSION['cart']as $nameId => $amount){ ?>
@@ -181,16 +197,40 @@ if (isset($_POST['plusbtn']) && $_POST['plusbtn'] == '+') {
                                 <td><?= ($nameId); ?> </td>
                                 <td><?= ($amount); ?> </td>
                                 <td><form method="post">
-                                    <input type="submit" name="minbtn" value="-" />
+                                    <input type="submit" name="min100btn" value="-100" />
                                     <input type="hidden" name="name" value="<?= ($nameId); ?>" />
-                                    <input type="hidden" name="price" value="<?= ($amount); ?>" />
+                                    <input type="hidden" name="amount" value="<?= ($amount); ?>" />
                                 </form></td>
                                 <td><form method="post">
-                                    <input type="submit" name="plusbtn" value="+" />
+                                    <input type="submit" name="min10btn" value="-10" />
                                     <input type="hidden" name="name" value="<?= ($nameId); ?>" />
-                                    <input type="hidden" name="price" value="<?= ($amount); ?>" />
+                                    <input type="hidden" name="amount" value="<?= ($amount); ?>" />
+                                </form></td>
+                                <td><form method="post">
+                                    <input type="submit" name="minbtn" value="-1" />
+                                    <input type="hidden" name="name" value="<?= ($nameId); ?>" />
+                                    <input type="hidden" name="amount" value="<?= ($amount); ?>" />
+                                </form></td>
+                                <td><form method="post">
+                                    <input type="submit" name="plusbtn" value="+1" />
+                                    <input type="hidden" name="name" value="<?= ($nameId); ?>" />
+                                    <input type="hidden" name="amount" value="<?= ($amount); ?>" />
+                                </form></td>
+                                <td><form method="post">
+                                    <input type="submit" name="plus10btn" value="+10" />
+                                    <input type="hidden" name="name" value="<?= ($nameId); ?>" />
+                                    <input type="hidden" name="amount" value="<?= ($amount); ?>" />
+                                </form></td>
+                                <td><form method="post">
+                                    <input type="submit" name="plus100btn" value="+100" />
+                                    <input type="hidden" name="name" value="<?= ($nameId); ?>" />
+                                    <input type="hidden" name="amount" value="<?= ($amount); ?>" />
                                 </form></td>
                                     </tr>
+                                    <?php } ?>
+                                    
+                                    <?php foreach($result as $res){ ?>
+                                    <td><?= $_SESSION ?></td>
                                     <?php } ?>
                             </tbody>
                             </table>
@@ -207,7 +247,7 @@ if (isset($_POST['plusbtn']) && $_POST['plusbtn'] == '+') {
                         <input type="button" value="order" onclick="location='bestel.php'" style="width: 200px; height: 100px; border-radius: 10px;" />
                         <?php if(isset($_SESSION['cart'])){ ?>
                             <td><form method="post">
-                                    <input type="submit" name="delbtn" value="hio" />
+                                    <input type="submit" name="delbtn" value="delete" />
                                     <input type="hidden" name="name" value="<?= ($nameId); ?>" />
                                     <input type="hidden" name="price" value="<?= ($amount); ?>" />
                                 </form></td>

@@ -173,6 +173,7 @@ if(isset($_POST["submit"])){
                     <tr><?php foreach($_SESSION['cart']as $nameId => $amount){ ?>
                         <tr><?= ($nameId); ?></tr>
                         <tr><?= ($amount); ?></tr>
+                        
                     </tr>
                     <?PHP } ?>
                     </div>
