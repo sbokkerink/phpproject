@@ -198,7 +198,7 @@ if (isset($_POST['plusbtn']) && $_POST['plusbtn'] == '+') {
                         <div class="card-footer">
                             <small class="text-muted">
                                 <?php
-                                $hourdiff = +2; // Replace the 0 with your timezone difference (;
+                                $hourdiff = +2; 
                                 $site = date("l, d F Y H:i:s a",time() + ($hourdiff * 3600));
                                 echo $site;
                                 ?>
@@ -207,7 +207,7 @@ if (isset($_POST['plusbtn']) && $_POST['plusbtn'] == '+') {
                         <input type="button" value="order" onclick="location='bestel.php'" style="width: 200px; height: 100px; border-radius: 10px;" />
                         <?php if(isset($_SESSION['cart'])){ ?>
                             <td><form method="post">
-                                    <input type="submit" name="delbtn" value="delete" />
+                                    <input type="submit" name="delbtn" value="hio" />
                                     <input type="hidden" name="name" value="<?= ($nameId); ?>" />
                                     <input type="hidden" name="price" value="<?= ($amount); ?>" />
                                 </form></td>
