@@ -228,10 +228,12 @@ if (isset($_POST['plus100btn']) && $_POST['plus100btn'] == '+100') {
                                 </form></td>
                                     </tr>
                                     <?php } ?>
-                                    
-                                    <?php foreach($result as $res){ ?>
-                                    <td><?= $_SESSION ?></td>
-                                    <?php } ?>
+
+                                    <td><?= $price ?></td>
+                                    <?php
+                                    $totalprice = $price * $amount;
+                                    ?>
+                                    <?php echo ($totalprice); ?>
                             </tbody>
                             </table>
                         </div>
