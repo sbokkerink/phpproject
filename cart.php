@@ -228,8 +228,6 @@ if (isset($_POST['plus100btn']) && $_POST['plus100btn'] == '+100') {
                                 </form></td>
                                     </tr>
                                     <?php } ?>
-
-                                    <?php echo ($totalprice); ?>
                             </tbody>
                             </table>
                         </div>
