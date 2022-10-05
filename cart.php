@@ -229,7 +229,6 @@ if (isset($_POST['plus100btn']) && $_POST['plus100btn'] == '+100') {
                                     </tr>
                                     <?php } ?>
 
-                                    <td><?= $price ?></td>
                                     <?php
                                     $totalprice = $price * $amount;
                                     ?>
