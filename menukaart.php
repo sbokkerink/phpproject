@@ -18,7 +18,7 @@ if (isset($_POST['addbtn']) && $_POST['addbtn'] == 'add to cart') {
     $_SESSION['cart'][$_POST['name']] += 1;
 }
 
-
+ 
 // echo '<pre>'.print_r($_GET,true).'</pre>'; 
 // echo '<pre>'.print_r($_POST,true).'</pre>';  
 // echo '<pre>'.print_r($_SESSION,true).'</pre>';
@@ -139,7 +139,7 @@ if (isset($_POST['addbtn']) && $_POST['addbtn'] == 'add to cart') {
                                 </div>
                                 <div class="stamp">
                                     <img src="images/stamp.png" alt="" />
-                                </div>1
+                                </div>
                             </div>
                         </div>
                     </div>

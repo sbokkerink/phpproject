@@ -27,14 +27,6 @@ if (isset($_POST['plus10btn']) && $_POST['plus10btn'] == '+10') {
     $_SESSION['cart'][$_POST['name']] += 10;
 }
 
-if (isset($_POST['min100btn']) && $_POST['min100btn'] == '-100') {
-    $_SESSION['cart'][$_POST['name']] -= 100;
-}
-
-if (isset($_POST['plus100btn']) && $_POST['plus100btn'] == '+100') {
-    $_SESSION['cart'][$_POST['name']] += 100;
-}
-
 // unset($_SESSION['cart']);
 
 
@@ -192,20 +184,17 @@ if (isset($_POST['plus100btn']) && $_POST['plus100btn'] == '+100') {
                                     echo 'your cart is empty!! go back to menu and order your food!';
                                 }
                             ?>
-                            <?php foreach($_SESSION['cart']as $nameId => $amount){ ?>
+                            <?php foreach($_SESSION['cart']as $nameId => $amount){ 
+                                 $sql = "SELECT * FROM menu WHERE price = '$nameId'" ?> 
                                 <tr>
                                 <td><?= ($nameId); ?> </td>
                                 <td><?= ($amount); ?> </td>
-                                <td><form method="post">
-                                    <input type="submit" name="min100btn" value="-100" />
-                                    <input type="hidden" name="name" value="<?= ($nameId); ?>" />
-                                    <input type="hidden" name="amount" value="<?= ($amount); ?>" />
-                                </form></td>
-                                <td><form method="post">
-                                    <input type="submit" name="min10btn" value="-10" />
-                                    <input type="hidden" name="name" value="<?= ($nameId); ?>" />
-                                    <input type="hidden" name="amount" value="<?= ($amount); ?>" />
-                                </form></td>
+                                <td><?= ($_SESSION['price']); ?> </td>
+                                <?php 
+                                $price = "price";
+                                $price = $price * $amount;
+                                $totalprice = $price + $price;
+                                ?>
                                 <td><form method="post">
                                     <input type="submit" name="minbtn" value="-1" />
                                     <input type="hidden" name="name" value="<?= ($nameId); ?>" />
@@ -213,16 +202,6 @@ if (isset($_POST['plus100btn']) && $_POST['plus100btn'] == '+100') {
                                 </form></td>
                                 <td><form method="post">
                                     <input type="submit" name="plusbtn" value="+1" />
-                                    <input type="hidden" name="name" value="<?= ($nameId); ?>" />
-                                    <input type="hidden" name="amount" value="<?= ($amount); ?>" />
-                                </form></td>
-                                <td><form method="post">
-                                    <input type="submit" name="plus10btn" value="+10" />
-                                    <input type="hidden" name="name" value="<?= ($nameId); ?>" />
-                                    <input type="hidden" name="amount" value="<?= ($amount); ?>" />
-                                </form></td>
-                                <td><form method="post">
-                                    <input type="submit" name="plus100btn" value="+100" />
                                     <input type="hidden" name="name" value="<?= ($nameId); ?>" />
                                     <input type="hidden" name="amount" value="<?= ($amount); ?>" />
                                 </form></td>
@@ -240,16 +219,19 @@ if (isset($_POST['plus100btn']) && $_POST['plus100btn'] == '+100') {
                                 ?>
                             </small>
                         </div>
+                        <?php
+                        if(isset($_SESSION['cart']) && empty($_SESSION['cart'])) {}else{ ?>
                         <input type="button" value="order" onclick="location='bestel.php'" style="width: 200px; height: 100px; border-radius: 10px;" />
-                        <?php if(isset($_SESSION['cart'])){ ?>
+                            <?php } ?>
+                        <?php if(isset($_SESSION['cart']) && empty($_SESSION['cart'])) {}else{ ?>
                             <td><form method="post">
                                     <input type="submit" name="delbtn" value="delete" />
                                     <input type="hidden" name="name" value="<?= ($nameId); ?>" />
                                     <input type="hidden" name="price" value="<?= ($amount); ?>" />
                                 </form></td>
+                            <?php } ?>
                             <input type="button" value="menu" onclick="location='menukaart.php'" style="width: 200px; height: 100px; border-radius: 10px;" />
                         <!-- <button type="button" style="width: 200px; height: 100px; border-radius: 10px;">delete all</button> -->
-                        <?php } ?>
                             </div>
                     </div>
                 </div>
@@ -315,7 +297,6 @@ if (isset($_POST['plus100btn']) && $_POST['plus100btn'] == '+100') {
                                 <li><a href="" class="fa fa-twitter"></a></li>
                                 <li><a href="" class="fa fa-instagram"></a></li>
                             </ul>
-
                             <div class="footer-copyright">
                                 <p class="wow fadeInRight" data-wow-duration="1s">
                                     Made with 
