@@ -165,6 +165,7 @@ if (isset($_POST['plusbtn']) && $_POST['plusbtn'] == '+1') {
                                 <th scope="col">name</th>
                                 <th scope="col">amount</th>
                                 <th scope="col">price</th>
+                                <th scope="col">amount price</th>
                                 </tr>
                             </thead>
                             <?php } ?>
@@ -177,24 +178,27 @@ if (isset($_POST['plusbtn']) && $_POST['plusbtn'] == '+1') {
                                     echo 'your cart is empty, go back to menu and order some food!!';
                                 }
                             ?>
-                            <?php foreach($_SESSION['cart'] as $nameId => $amount){ 
+                            <?php 
+                                $totalprice = 0;
+                                foreach($_SESSION['cart'] as $nameId => $amount){ 
                                 
                                 $sql = "SELECT * FROM menu WHERE name = '$nameId'";
 
                                 $stmt = $conn->prepare($sql);
                                 $stmt->execute();
                                 $result = $stmt->fetch();  
-                                echo '<pre>'.print_r($result,true).'</pre>';  
+                                // echo '<pre>'.print_r($result,true).'</pre>';  
                                 ?> 
+                                <?php 
+                                $price = $amount * $result[2];
+
+                                $totalprice = $totalprice + $price;
+                                ?>
                                 <tr>
                                 <td><?= ($nameId); ?> </td>
-                                <td><?= ($result['price']); ?> </td>
                                 <td><?= ($amount); ?> </td>
-                                <?php 
-                                $price = "price";
-                                
-                                $totalprice = $price + $price;
-                                ?>
+                                <td><?= ($result[2]); ?> </td>
+                                <td><?= ($price); ?> </td>
                                 <td><form method="post">
                                     <input type="submit" name="minbtn" value="-1" />
                                     <input type="hidden" name="name" value="<?= ($nameId); ?>" />
@@ -207,6 +211,9 @@ if (isset($_POST['plusbtn']) && $_POST['plusbtn'] == '+1') {
                                 </form></td>
                                     </tr>
                                     <?php } ?>
+                                    <?php
+                                    echo $totalprice;
+                                ?>
                             </tbody>
                             </table>
                         </div>
