@@ -162,10 +162,10 @@ if (isset($_POST['plusbtn']) && $_POST['plusbtn'] == '+1') {
                             <?php
                             if(isset($_SESSION['cart'])){ ?>
                             <thead>
-                                <th scope="col">name</th>
-                                <th scope="col">amount</th>
-                                <th scope="col">price</th>
-                                <th scope="col">amount price</th>
+                                <th scope="col">name:</th>
+                                <th scope="col">amount:</th>
+                                <th scope="col">price:</th>
+                                <th scope="col">amount price:</th>
                                 </tr>
                             </thead>
                             <?php } ?>
@@ -211,11 +211,10 @@ if (isset($_POST['plusbtn']) && $_POST['plusbtn'] == '+1') {
                                 </form></td>
                                     </tr>
                                     <?php } ?>
-                                    <?php
-                                    echo $totalprice;
-                                ?>
                             </tbody>
                             </table>
+                            <th scope="col">totalprice:</th>
+                            <?= $totalprice; ?>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">
