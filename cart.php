@@ -19,13 +19,6 @@ if (isset($_POST['plusbtn']) && $_POST['plusbtn'] == '+1') {
     $_SESSION['cart'][$_POST['name']] += 1;
 }
 
-if (isset($_POST['min10btn']) && $_POST['min10btn'] == '-10') {
-    $_SESSION['cart'][$_POST['name']] -= 10;
-}
-
-if (isset($_POST['plus10btn']) && $_POST['plus10btn'] == '+10') {
-    $_SESSION['cart'][$_POST['name']] += 10;
-}
 
 // unset($_SESSION['cart']);
 
@@ -181,18 +174,25 @@ if (isset($_POST['plus10btn']) && $_POST['plus10btn'] == '+10') {
                                     $_SESSION['cart'] = [];
                                 }
                                 if(isset($_SESSION['cart']) && empty($_SESSION['cart'])) {
-                                    echo 'your cart is empty!! go back to menu and order your food!';
+                                    echo 'your cart is empty, go back to menu and order some food!!';
                                 }
                             ?>
-                            <?php foreach($_SESSION['cart']as $nameId => $amount){ 
-                                 $sql = "SELECT * FROM menu WHERE price = '$nameId'" ?> 
+                            <?php foreach($_SESSION['cart'] as $nameId => $amount){ 
+                                
+                                $sql = "SELECT * FROM menu WHERE name = '$nameId'";
+
+                                $stmt = $conn->prepare($sql);
+                                $stmt->execute();
+                                $result = $stmt->fetch();  
+                                echo '<pre>'.print_r($result,true).'</pre>';  
+                                ?> 
                                 <tr>
                                 <td><?= ($nameId); ?> </td>
+                                <td><?= ($result['price']); ?> </td>
                                 <td><?= ($amount); ?> </td>
-                                <td><?= ($_SESSION['price']); ?> </td>
                                 <?php 
                                 $price = "price";
-                                $price = $price * $amount;
+                                
                                 $totalprice = $price + $price;
                                 ?>
                                 <td><form method="post">

@@ -2,12 +2,12 @@
 include_once "connection.php";
 if(isset($_POST["submit"])){
 
-    $sqli = "INSERT INTO users
+    $sql = "INSERT INTO users
               (lastname, email, phonenumber, address)
               VALUES
               (:lastname, :email, :phonenumber, :address)
       ";
-      $stmt = $conn->prepare($sqli);
+      $stmt = $conn->prepare($sql);
       $stmt->bindParam(':lastname', $_POST['lastname']);
       $stmt->bindParam(':email', $_POST['email']);
       $stmt->bindParam(':phonenumber', $_POST['phonenumber']);
